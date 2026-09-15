@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arer Wallet Node Interface</title>
+    <!-- Tailwind CSS for robust styling and grid scaffolding -->
+    <script src="https://tailwindcss.com"></script>
+    <style>
+        body { background-color: #060913; color: #cbd5e1; }
+        .cyber-panel-border {
+            border: 1px solid transparent;
+            background: linear-gradient(#060913, #060913) padding-box,
+                        linear-gradient(135deg, #2563eb, #7c3aed) border-box;
+        }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #060913; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 2px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased text-gray-300 selection:bg-purple-600/30 selection:text-purple-300">
+
+    <!-- Global App Header -->
+    <header class="border-b border-gray-900 bg-[#0c1020]/90 backdrop-blur sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <span class="text-xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500">ARER // WALLET</span>
+            <span class="px-2 py-0.5 text-[9px] font-mono font-bold rounded bg-purple-950/40 text-purple-300 border border-purple-500/30 uppercase tracking-widest">Lere Native</span>
+        </div>
+        <div class="flex items-center space-x-6 text-xs font-mono">
+            <div class="hidden sm:flex items-center space-x-2 text-gray-400 bg-[#060913] px-3 py-1.5 rounded border border-gray-800">
+                <span class="text-purple-400">domain:</span>
+                <span class="text-gray-200">own.lere</span>
+            </div>
+            <div class="flex items-center space-x-2 bg-emerald-950/40 border border-emerald-800/30 px-3 py-1.5 rounded-full">
+                <div class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                <span class="text-emerald-400 font-medium text-[11px]">Node Sync Active</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace Split-Grid Dashboard -->
+    <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 max-w-7xl mx-auto w-full">
+        
+        <!-- Left Side Layout Workspace: Balance Grid & Transaction Terminal -->
+        <div class="lg:col-span-7 space-y-6">
+            
+            <!-- Component Module: assetGrid UI -->
+            <div class="bg-[#0c1020] border border-gray-900 rounded-xl p-6 shadow-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs font-mono text-purple-400">comp::</span>
+                        <h2 class="text-sm font-bold uppercase tracking-wider text-white">assetGrid</h2>
+                    </div>
+                    <span id="wallet-total-value" class="text-xs font-mono bg-gray-900/60 px-3 py-1 rounded border border-gray-800 text-blue-400">$34,850.00 USD</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Native Utility Token Frame -->
+                    <div class="bg-[#060913] border border-purple-900/40 bg-gradient-to-br from-purple-950/10 to-transparent rounded-xl p-4 flex justify-between items-center col-span-1 sm:col-span-2">
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="bg-purple-950 text-purple-300 text-[9px] font-mono px-2 py-0.5 rounded border border-purple-800/30 uppercase tracking-wider font-bold">Native Token</span>
+                            </div>
+                            <p class="text-2xl font-black text-white tracking-wider mt-2"><span id="bal-arr">142,500.00</span> <span class="text-sm font-normal text-purple-400">ARR</span></p>
+                        </div>
+                        <span class="text-xl">⚡</span>
+                    </div>
+
+                    <!-- Bitcoin Balance Item -->
+                    <div class="bg-[#060913] border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-gray-800 transition">
+                        <div>
+                            <p class="text-[11px] text-gray-500 font-mono">Bitcoin Core</p>
+                            <p class="text-lg font-bold text-white tracking-wide mt-1"><span id="bal-btc">1.4025</span> <span class="text-xs font-normal text-amber-500 font-mono">BTC</span></p>
+                        </div>
+                        <span class="text-sm font-mono text-gray-500 bg-gray-950 px-2 py-1 rounded border border-gray-900">₿</span>
+                    </div>
+
+                    <!-- Ethereum Balance Item -->
+                    <div class="bg-[#060913] border border-gray-900 rounded-xl p-4 flex justify-between items-center hover:border-gray-800 transition">
+                        <div>
+                            <p class="text-[11px] text-gray-500 font-mono">Ethereum Network</p>
+                            <p class="text-lg font-bold text-white tracking-wide mt-1"><span id="bal-eth">18.640</span> <span class="text-xs font-normal text-blue-400 font-mono">ETH</span></p>
+                        </div>
+                        <span class="text-sm font-mono text-gray-500 bg-gray-950 px-2 py-1 rounded border border-gray-900">Ξ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Component Module: transactionEngine Pipeline Terminal Input -->
+            <div class="bg-[#0c1020] border border-gray-900 rounded-xl p-6 shadow-2xl cyber-panel-border">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs font-mono text-purple-400">comp::</span>
+                        <h2 class="text-sm font-bold uppercase tracking-wider text-white">transactionEngine</h2>
+                    </div>
+                    <span class="text-[10px] bg-purple-950 text-purple-300 px-2 py-0.5 rounded font-mono border border-purple-900/40">ED25519 Sign</span>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-[11px] font-mono uppercase tracking-widest text-gray-500 mb-1">Destination Address / Public Routing String</label>
+                        <input id="tx-destination" type="text" class="w-full bg-[#060913] border border-gray-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-purple-500 font-mono transition" placeholder="Enter target HNS address or public hash key...">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-mono uppercase tracking-widest text-gray-500 mb-1">Asset Volume Size</label>
+                            <input id="tx-amount" type="number" step="any" class="w-full bg-[#060913] border border-gray-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-purple-500 font-mono transition" placeholder="0.00">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-mono uppercase tracking-widest text-gray-500 mb-1">Ticker Currency</label>
+                            <select id="tx-token" class="w-full bg-[#060913] border border-gray-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-purple-500 font-mono transition cursor-pointer">
+                                <option value="ARR">ARR (Native Utility)</option>
+                                <option value="BTC">BTC (Bitcoin)</option>
+                                <option value="ETH">ETH (Ethereum)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button onclick="dispatchTransaction()" class="w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 hover:from-blue-600 hover:via-indigo-600 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-lg text-xs tracking-widest uppercase transition duration-200 transform active:scale-[0.99] shadow-lg shadow-purple-500/20">
+                        Sign & Broadcast Transaction Frame
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Side Layout Workspace: Decentralized Namebase Registry Proof Verification View -->
+        <div class="lg:col-span-5 flex flex-col bg-[#0c1020] border border-gray-900 rounded-xl p-6 shadow-2xl">
+            
+            <div class="flex justify-between items-center mb-4 pb-3 border-b border-gray-900">
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs font-mono text-blue-400">agent::</span>
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-white">securityAuditor</h2>
+                </div>
+                <span class="text-[10px] bg-gray-900 px-2 py-0.5 rounded border border-gray-800 text-purple-400 font-mono">ctx: walletDefender</span>
+            </div>
+
+            <!-- Attestation Metadata Block Details Panel -->
+            <div class="bg-[#060913] border border-gray-900 rounded-lg p-4 mb-4 space-y-2 text-xs font-mono">
+                <div class="flex justify-between text-[11px]">
+                    <span class="text-gray-500 font-bold uppercase">Namebase Verification Block</span>
+                    <span class="text-emerald-400 font-medium">Account Verified</span>
+                </div>
+                <div class="pt-2 border-t border-gray-900/60 space-y-1.5 text-[11px] text-gray-400">
